@@ -43,6 +43,7 @@ int main()
     update_thread_pool_tasks(pool, t6, 6);
     awake_threads(pool);
     wait_all_threads(pool);
+    release_thread_pool(pool);
     
     printf("Finished second batch \n");
     

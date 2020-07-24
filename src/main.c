@@ -50,11 +50,6 @@ int main()
     return 0;
 }
 
-static void execute_first_batch()
-{
-    
-}
-
 static void execute_task(void *argument, PoolNotifier notifier, void(*completion)(PoolNotifier))
 {
     printf("Executed task with argument id %d \n", *((int*)argument));

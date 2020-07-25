@@ -16,6 +16,5 @@ Task *init_task(Task *next, void *function_arg, void (*execute)(void *function_a
 
 void releease_task(Task *task)
 {
-    free(task->function_arg);
     free(task);
 }

@@ -9,43 +9,37 @@ static void execute_task(void *argument, PoolNotifier notifier, void(*completion
 
 int main()
 {
-    int tt5 = 5;
-    Task *t5 = init_task(NULL, &tt5, execute_task);
-    int tt4 = 4;
-    Task *t4 = init_task(t5, &tt4, execute_task);
-    int tt3 = 3;
-    Task *t3 = init_task(t4, &tt3, execute_task);
-    int tt2 = 2;
-    Task *t2 = init_task(t3, &tt2, execute_task);
-    int tt1 = 1;
-    Task *t1 = init_task(t2, &tt1, execute_task);
-    int tt0 = 0;
-    Task *t0 = init_task(t1, &tt0, execute_task);
+    Task *tasks[13];
+    int tasks_ids[12] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+
+    tasks[6] = NULL;
+    for (int i=5; i>=0; i--)
+    {
+        tasks[i] = init_task(tasks[i+1], &tasks_ids[i], execute_task); 
+    }
     
-    ThreadPool *pool = init_thread_pool(3, t0, 6);
+    ThreadPool *pool = init_thread_pool(3, tasks[0], 6);
     wait_all_threads(pool);
     
     printf("Finished first batch \n");
+
+    tasks[12] = NULL;
+    for (int i=11; i>=6; i--)
+    {
+        tasks[i] = init_task(tasks[i+1], &tasks_ids[i], execute_task); 
+    }
     
-    int tt11 = 11;
-    Task *t11 = init_task(NULL, &tt11, execute_task);
-    int tt10 = 10;
-    Task *t10 = init_task(t11, &tt10, execute_task);
-    int tt9 = 9;
-    Task *t9 = init_task(t10, &tt9, execute_task);
-    int tt8 = 8;
-    Task *t8 = init_task(t9, &tt8, execute_task);
-    int tt7 = 7;
-    Task *t7 = init_task(t8, &tt7, execute_task);
-    int tt6 = 6;
-    Task *t6 = init_task(t7, &tt6, execute_task);
-    
-    update_thread_pool_tasks(pool, t6, 6);
+    update_thread_pool_tasks(pool, tasks[6], 6);
     awake_threads(pool);
     wait_all_threads(pool);
     release_thread_pool(pool);
     
     printf("Finished second batch \n");
+
+    for(int i=0; i<12; i++)
+    {
+        releease_task(tasks[i]);
+    }
     
     return 0;
 }

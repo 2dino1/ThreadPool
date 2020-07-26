@@ -1,6 +1,5 @@
-//od  Created by Sima Vlad Grigore on 12/07/2020.
+//  Created by Sima Vlad Grigore on 12/07/2020.
 //  Copyright © 2020 Sima Vlad Grigore. All rights reserved.
-//
 
 #include <stdio.h>
 #include "thread_pool/thread_pool.h"

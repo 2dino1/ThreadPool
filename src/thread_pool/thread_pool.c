@@ -18,7 +18,7 @@ typedef struct ThreadPool {
 } ThreadPool;
 
 static void create_threads(const int numberOfThreads, ThreadPool *pool);
-static void* routine(void * thread_arg);
+static void *routine(void *thread_arg);
 static void setup_thread_pool_locking(ThreadPool *pool);
 static void task_finished_callback(PoolNotifier notifier);
 static inline PoolNotifier create_pool_notifier(ThreadPool *pool);

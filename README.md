@@ -1,8 +1,23 @@
-A small implementation of a thread pool that simulates the execution of an async queue. 
+# Thread Pool
 
-You can:
+This project is a representation of a thread pool.
+
+## Installation
+
+In the Makefile folder, open a terminal and run make all.
+
+```bash
+make all
+```
+
+## Usage
+
+The project behaves like a async queue, that supports multiple tasks being scheduled at the same time. This is a task base represantation of a thread pool, meaning all the thread's state is dictated by the state of the task it executes and this behaviour is independant from the thread that executes it. When there are no more tasks in the pool to execute, all spawn threads halt and are pulled out from ready queue of the processor, to avoid spinning. When new tasks are added to the processor, the calling thread sends a broadcast message to all sleeping threads to awake and start executing the new batch of tasks.
+
+In what regard the functionality, you can do the following:
+
 1. Schedules task for execution.
 2. Wait for all tasks.
-3. Queue up for tasks for execution after a specific batch has finished.
-3. Awake the thread pool(created threads) if more tasks are scheduled.
-4. Exit the thread pool to clean the memory afterwards. 
+3. Queue up for tasks  execution after a specific batch has finished.
+4. Awake the thread pool(created threads) if another batch of tasks is scheduled.
+5. Exit the thread pool to clean the memory afterwards.

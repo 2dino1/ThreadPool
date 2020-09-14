@@ -4,10 +4,11 @@ This project is a representation of a thread pool.
 
 ## Installation
 
-In the Makefile folder, open a terminal and run make all.
+In the Makefile folder, open a terminal and run make all(previous to this you need to have a C compiler installed). After that the Makefile will generate a main executable that you can run after with ./main. 
 
 ```bash
 make all
+./main
 ```
 
 ## Usage
